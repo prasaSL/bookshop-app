@@ -50,9 +50,13 @@ export default function Navbar() {
 
       {/* Middle section: Navigation Links */}
       <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
-        <Button color="inherit" startIcon={<HomeIcon />} >
-          Home
-        </Button>
+      <Button 
+      color="inherit" 
+      startIcon={<HomeIcon />}
+      onClick={() => isAuth ? router.push('/books') : router.push('/')}
+    >
+      Home
+    </Button>
         
        
       </Box>

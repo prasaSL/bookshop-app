@@ -112,6 +112,14 @@ export default function BookList() {
         value={search}
         onChange={handleSearchChange}
       />
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mt: 2 }}
+        onClick={() => router.push('/books/add')}
+      >
+        Add New Book
+      </Button>
       
 
       <TableContainer component={Paper}>

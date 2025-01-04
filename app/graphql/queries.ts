@@ -24,15 +24,7 @@ export const REGISTER_USER = gql`
   }
 `;
 
-// Update Book
-export const UPDATE_BOOK = gql`
-  mutation UpdateBook($id: String!, $updateBookInput: CreateBookDto!) {
-    updateBook(id: $id, updateBookInput: $updateBookInput) {
-      id
-      title
-    }
-  }
-`;
+
 
 // Delete Book
 export const DELETE_BOOK = gql`
@@ -73,6 +65,33 @@ export const LOGIN_USER = gql`
 export const GET_BOOKS = gql`
   query GetBooks {
     books {
+      id
+      title
+      author
+      publishedYear
+      genre
+    }
+  }
+`;
+
+
+
+
+export const GET_BOOK = gql`
+  query GetBook($id: String!) {
+    book(id: $id) {
+      id
+      title
+      author
+      publishedYear
+      genre
+    }
+  }
+`;
+
+export const UPDATE_BOOK = gql`
+  mutation UpdateBook($id: String!, $updateBookInput: CreateBookDto!) {
+    updateBook(id: $id, updateBookInput: $updateBookInput) {
       id
       title
       author
