@@ -12,11 +12,15 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import Button from '@mui/material/Button';
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
-
+import { isAuthenticated,
+  clearToken
+ } from '../utils/auth';
+ import { useRouter } from 'next/navigation';
 export default function Navbar() {
   const pathname = usePathname();
-
+  const router = useRouter();
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/books', label: 'Books' },
@@ -24,13 +28,22 @@ export default function Navbar() {
     { path: '/auth/register', label: 'Register' },
   ];
 
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    setIsAuth(isAuthenticated());
+  }, []);
+  const handleLogout = () => {
+    clearToken();
+    setIsAuth(false);
+    router.push('/login');
+  };
+
   return (
     <AppBar position="static" color="primary">
     <Toolbar>
       {/* Left section: Logo and Title */}
-      <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-        <MenuIcon />
-      </IconButton>
+      
       <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
         Book Store
       </Typography>
@@ -40,38 +53,35 @@ export default function Navbar() {
         <Button color="inherit" startIcon={<HomeIcon />} >
           Home
         </Button>
-        <Button color="inherit" startIcon={<InfoIcon />} >
-          About
-        </Button>
-        <Button color="inherit" startIcon={<ContactMailIcon />} >
-          Contact
-        </Button>
+        
+       
       </Box>
 
       {/* Right section: Auth Buttons */}
       <Box>
-        {/* {isAuthenticated ? (
-          <>
-            <Button color="inherit" >
-              Logout
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button color="inherit" >
-              Login
-            </Button>
-            <Button color="inherit" >
-              Register
-            </Button>
-          </>
-        )} */}
-         <Button color="inherit" >
-              Login
-            </Button>
-            <Button color="inherit" >
-              Register
-            </Button>
+      {isAuth ? (
+        <Button 
+          color="inherit"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      ) : (
+        <>
+          <Button 
+            color="inherit"
+            onClick={() => router.push('/login')}
+          >
+            Login
+          </Button>
+          <Button 
+            color="inherit"
+            onClick={() => router.push('/register')}
+          >
+            Register
+          </Button>
+        </>
+      )}
       </Box>
     </Toolbar>
   </AppBar>
