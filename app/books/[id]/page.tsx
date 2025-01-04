@@ -13,30 +13,13 @@ import {
   Snackbar,
   Alert,
 } from '@mui/material';
+import { 
+  GET_BOOK,
+  UPDATE_BOOK,
 
-const GET_BOOK = gql`
-  query GetBook($id: String!) {
-    book(id: $id) {
-      id
-      title
-      author
-      publishedYear
-      genre
-    }
-  }
-`;
+} from '../graphql/queries';
 
-const UPDATE_BOOK = gql`
-  mutation UpdateBook($id: String!, $updateBookInput: CreateBookDto!) {
-    updateBook(id: $id, updateBookInput: $updateBookInput) {
-      id
-      title
-      author
-      publishedYear
-      genre
-    }
-  }
-`;
+
 
 interface Book {
   id: string;
