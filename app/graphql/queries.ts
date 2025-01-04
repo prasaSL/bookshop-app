@@ -18,7 +18,7 @@ export const REGISTER_USER = gql`
   mutation Register($registerUserInput: RegisterUserInput!) {
     register(registerUserInput: $registerUserInput) {
       id
-      email
+      username
       role
     }
   }
