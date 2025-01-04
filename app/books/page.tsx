@@ -1,5 +1,5 @@
 'use client';
-
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import {
@@ -36,6 +36,8 @@ export default function BookList() {
     message: '',
     severity: 'success' as 'success' | 'error'
   });
+
+  const router = useRouter();
 
   const { data: allBooks, loading, error, refetch } = useQuery(GET_BOOKS);
   const { data: searchResults } = useQuery(SEARCH_BOOKS, {
@@ -110,6 +112,7 @@ export default function BookList() {
         value={search}
         onChange={handleSearchChange}
       />
+      
 
       <TableContainer component={Paper}>
         <Table>
@@ -133,6 +136,7 @@ export default function BookList() {
                   <IconButton
                     size="small"
                     sx={{ mr: 1 }}
+                    onClick={() => router.push(`/books/${book.id}`)} // Navigate to the book edit page
                   >
                     <EditIcon 
                       sx={{ color: 'primary.main' }}
