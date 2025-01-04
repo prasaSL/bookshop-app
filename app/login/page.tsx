@@ -46,7 +46,7 @@ export default function Login() {
         variables: { loginUserInput } 
       }) as { data: LoginData };
       
-      setToken(data.login.token);
+      setToken(data.login.accessToken);
       router.push('/books');
     } catch (err: any) {
       setError(err.message);

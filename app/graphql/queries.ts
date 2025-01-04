@@ -40,6 +40,7 @@ export const DELETE_BOOK = gql`
     deleteBook(id: $id) {
       id
       title
+     
     }
   }
 `;
@@ -64,6 +65,19 @@ export const LOGIN_USER = gql`
         username
         role
       }
+    }
+  }
+`;
+
+
+export const GET_BOOKS = gql`
+  query GetBooks {
+    books {
+      id
+      title
+      author
+      publishedYear
+      genre
     }
   }
 `;
